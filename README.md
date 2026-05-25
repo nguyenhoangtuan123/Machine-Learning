@@ -1,98 +1,228 @@
-# 🫀 Hệ thống Phân loại Nhịp tim ECG (ECG Heartbeat Classifier)
+# 🫀 ECG Heartbeat Classification System
 
-Một ứng dụng Full-stack tích hợp Machine Learning toàn diện dùng để phân loại nhịp tim thông qua điện tâm đồ (ECG). Dự án này kết hợp dữ liệu thu thập từ phần cứng (Arduino), một backend Python mạnh mẽ với nhiều mô hình Machine Learning cùng trí tuệ nhân tạo có thể giải thích được (Explainable AI - XAI), và một giao diện người dùng hiện đại được xây dựng bằng React.
+A comprehensive full-stack Machine Learning application for classifying heartbeats using Electrocardiogram (ECG) signals. This project integrates real-time hardware data acquisition (Arduino), a powerful Python backend with multiple Machine Learning models and Explainable AI (XAI), along with a modern React-based user interface.
 
-## ✨ Tính năng chính
+## ✨ Key Features
 
-- **Phân loại Đa mô hình**: Phân loại tín hiệu ECG thành 5 nhóm (Normal - Bình thường, Supraventricular Ectopic - Ngoại tâm thu trên thất, Ventricular Ectopic - Ngoại tâm thu thất, Fusion - Nhịp hỗn hợp, Unknown - Không xác định) sử dụng các mô hình khác nhau:
-  - Logistic Regression (Tự code từ đầu & dùng Scikit-learn)
-  - Support Vector Classifier (SVC - Tự giải bằng thuật toán tối ưu QP & Scikit-learn)
-  - Gradient Boosting Classifier
-  - XGBoost
-- **Xử lý Dữ liệu Nâng cao**: Xử lý tình trạng mất cân bằng dữ liệu và trích xuất đặc trưng bằng:
-  - **SMOTE** (Sinh thêm dữ liệu cho nhóm thiểu số)
-  - **Class Weight** (Cân bằng bằng trọng số lớp)
-  - **FFT** (Fast Fourier Transform - Biến đổi Fourier nhanh) để trích xuất đặc trưng miền tần số.
-- **Explainable AI (XAI)**: Hiểu và diễn giải các quyết định của mô hình thông qua biểu đồ:
-  - **SHAP** (SHapley Additive exPlanations)
-  - **LIME** (Local Interpretable Model-agnostic Explanations)
-- **Tích hợp Phần cứng**: Scripts thu thập tín hiệu theo thời gian thực (real-time) sử dụng vi điều khiển Arduino và cảm biến điện tâm đồ AD8232.
-- **Giao diện hiện đại**: Giao diện (UI) tương tác và phản hồi nhanh được xây dựng với Vite, React, và Tailwind CSS.
+* **Multi-Model Classification**: Classifies ECG signals into 5 heartbeat categories:
 
-## 🛠️ Công nghệ sử dụng
+  * **Normal**
+  * **Supraventricular Ectopic Beat**
+  * **Ventricular Ectopic Beat**
+  * **Fusion Beat**
+  * **Unknown Beat**
 
-- **Frontend**: React 19, Vite, Tailwind CSS, Shadcn UI / Radix UI, Chart.js
-- **Backend**: Python 3.10, Flask, Scikit-learn, XGBoost, CVXOPT
-- **Phần cứng**: Arduino, Cảm biến ECG AD8232
-- **Xử lý dữ liệu & XAI**: Pandas, NumPy, SHAP, LIME
+  using various Machine Learning models:
 
-## 📂 Cấu trúc Thư mục
+  * Logistic Regression (implemented from scratch & Scikit-learn)
+  * Support Vector Classifier (SVC - custom QP optimization & Scikit-learn)
+  * Gradient Boosting Classifier
+  * XGBoost
 
-- `/backend/`: Chứa API máy chủ Flask (`app.py`), các file mô hình ML đã train (`.pkl`), scripts giải thích mô hình (`shap_xgboost.py`, `lime_xgboost.py`), và danh sách thư viện cài đặt.
-- `/src/` & `/public/`: Mã nguồn của giao diện web frontend React.
-- `/ecg/`: Mã nguồn cho Arduino (`.ino`) và các scripts Python để giao tiếp với phần cứng, đọc dữ liệu ECG qua cổng Serial và vẽ biểu đồ theo thời gian thực.
-- `mitbih_train.csv`: Tập dữ liệu huấn luyện (MIT-BIH Arrhythmia Database).
+* **Advanced Data Processing**:
 
-## 🚀 Hướng dẫn Cài đặt & Chạy dự án
+  * Handles class imbalance using:
 
-### 1. Cài đặt Backend
+    * **SMOTE** (Synthetic Minority Oversampling Technique)
+    * **Class Weight Balancing**
+  * Feature extraction using:
 
-1. Mở terminal và di chuyển vào thư mục dự án:
+    * **FFT (Fast Fourier Transform)** for frequency-domain analysis.
+
+* **Explainable AI (XAI)**:
+  Understand and interpret model predictions through:
+
+  * **SHAP** (SHapley Additive exPlanations)
+  * **LIME** (Local Interpretable Model-agnostic Explanations)
+
+* **Hardware Integration**:
+  Real-time ECG signal acquisition using:
+
+  * Arduino
+  * AD8232 ECG sensor
+
+* **Modern User Interface**:
+  Responsive and interactive frontend built with:
+
+  * React
+  * Vite
+  * Tailwind CSS
+
+---
+
+## 🛠️ Technologies Used
+
+### Frontend
+
+* React 19
+* Vite
+* Tailwind CSS
+* Shadcn UI / Radix UI
+* Chart.js
+
+### Backend
+
+* Python 3.10
+* Flask
+* Scikit-learn
+* XGBoost
+* CVXOPT
+
+### Hardware
+
+* Arduino
+* AD8232 ECG Sensor
+
+### Data Processing & XAI
+
+* Pandas
+* NumPy
+* SHAP
+* LIME
+
+---
+
+## 📂 Project Structure
+
+* `/backend/`
+  Contains:
+
+  * Flask API server (`app.py`)
+  * Trained Machine Learning models (`.pkl`)
+  * Model explanation scripts (`shap_xgboost.py`, `lime_xgboost.py`)
+  * Python dependencies
+
+* `/src/` & `/public/`
+  Source code for the React frontend application.
+
+* `/ecg/`
+  Contains:
+
+  * Arduino source code (`.ino`)
+  * Python scripts for serial communication, ECG signal reading, and real-time plotting.
+
+* `mitbih_train.csv`
+  Training dataset from the MIT-BIH Arrhythmia Database.
+
+---
+
+# 🚀 Installation & Setup Guide
+
+## 1. Backend Setup
+
+1. Open a terminal and navigate to the project directory:
+
    ```bash
    cd ECG-heartbeat-classifier
    ```
-2. Tạo và kích hoạt môi trường ảo Python (khuyên dùng Python 3.10):
+
+2. Create and activate a Python virtual environment (Python 3.10 recommended):
+
    ```bash
    python -m venv venv
-   
-   # Trên Windows:
+
+   # Windows
    venv\Scripts\activate
-   # Trên macOS/Linux:
+
+   # macOS/Linux
    source venv/bin/activate
    ```
-3. Di chuyển vào thư mục backend:
+
+3. Navigate to the backend folder:
+
    ```bash
    cd backend
    ```
-4. Cài đặt các thư viện yêu cầu:
+
+4. Install required dependencies:
+
    ```bash
    pip install numpy==1.26.4 scikit-learn==1.2.2 flask flask-cors joblib pandas xgboost cvxopt matplotlib
    ```
-   *(Lưu ý: Nếu gặp lỗi phiên bản numpy, hãy thử cài `numpy==1.24.4`)*
-5. Chạy máy chủ Flask:
+
+   *(Note: If you encounter NumPy compatibility issues, try using `numpy==1.24.4` instead.)*
+
+5. Start the Flask server:
+
    ```bash
    python app.py
    ```
-   *Backend API sẽ chạy tại địa chỉ `http://localhost:5000`.*
 
-### 2. Cài đặt Frontend
+   The backend API will run at:
 
-1. Mở một **cửa sổ terminal mới** và di chuyển vào thư mục gốc của dự án (`ECG-heartbeat-classifier`).
-2. Cài đặt các gói thư viện Node.js:
+   ```bash
+   http://localhost:5000
+   ```
+
+---
+
+## 2. Frontend Setup
+
+1. Open a **new terminal window** and navigate to the project root directory (`ECG-heartbeat-classifier`).
+
+2. Install Node.js dependencies:
+
    ```bash
    npm install
    ```
-3. Chạy máy chủ phát triển (development server) của Vite:
+
+3. Start the Vite development server:
+
    ```bash
    npm run dev
    ```
-   *Giao diện web sẽ hiển thị tại địa chỉ `http://localhost:5173` (hoặc cổng được hiển thị trong terminal).*
 
-### 3. Cài đặt Phần cứng (Tuỳ chọn cho Dữ liệu Thời gian thực)
+   The frontend application will be available at:
 
-Nếu bạn đang sử dụng cảm biến AD8232 để lấy dữ liệu thực tế:
-1. Nạp mã code `ecg/ad8232.ino` vào mạch Arduino của bạn.
-2. Chạy các scripts Python trong thư mục `ecg/` (ví dụ: `python ecg_test_realtime_flaskplot.py`) để đọc, xử lý và vẽ biểu đồ tín hiệu trực tiếp.
+   ```bash
+   http://localhost:5173
+   ```
 
-## 📖 Hướng dẫn Sử dụng
+---
 
-1. Mở giao diện web trên trình duyệt.
-2. Chọn một mẫu ECG từ menu thả xuống (các mẫu này được trích xuất ngẫu nhiên từ file `mitbih_train.csv` đảm bảo có đủ 5 phân lớp nhịp tim).
-3. Bấm nút **"Classify"** (Phân loại).
-4. Xem kết quả dự đoán từ các mô hình học máy khác nhau.
-5. Khám phá các biểu đồ **SHAP** và **LIME** để xem cụ thể các khoảng thời gian nào (timestep) hoặc đặc trưng nào của tín hiệu đã ảnh hưởng nhiều nhất đến quyết định của mô hình XGBoost.
+## 3. Hardware Setup (Optional for Real-Time Data)
 
-## 📚 Tài liệu Tham khảo
+If you are using the AD8232 sensor for real ECG acquisition:
 
-- [1] Radford, A., Metz, L., & Chintala, S. (2016). *Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks*. arXiv:1805.00794. [Link](https://arxiv.org/abs/1805.00794)
+1. Upload the `ecg/ad8232.ino` code to your Arduino board.
 
+2. Run the Python scripts inside the `ecg/` folder, for example:
+
+   ```bash
+   python ecg_test_realtime_flaskplot.py
+   ```
+
+   These scripts will:
+
+   * Read ECG data from the serial port
+   * Process the signals
+   * Display real-time ECG plots
+
+---
+
+# 📖 Usage Guide
+
+1. Open the web application in your browser.
+
+2. Select an ECG sample from the dropdown menu.
+
+   * Samples are randomly extracted from `mitbih_train.csv`
+   * Ensures representation of all 5 heartbeat classes.
+
+3. Click the **"Classify"** button.
+
+4. View prediction results from different Machine Learning models.
+
+5. Explore **SHAP** and **LIME** visualizations to understand:
+
+   * Which timesteps
+   * Which signal features
+
+   contributed most to the XGBoost model’s prediction.
+
+---
+
+# 📚 References
+
+* [1] Alec Radford, Luke Metz, & Soumith Chintala (2016). *Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks*. arXiv:1805.00794.
+  [Paper Link](https://arxiv.org/abs/1805.00794?utm_source=chatgpt.com)
